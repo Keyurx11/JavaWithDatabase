@@ -24,10 +24,10 @@ public class Main {
         try {
             Connection conn = DriverManager.getConnection(connectionString, props);
             Statement statement = conn.createStatement();
-            ResultSet results = statement.executeQuery("SELECT * from \"books\"");
+            ResultSet results = statement.executeQuery("SELECT * from \"customer\" left outer join bookorder on bookorder.customerid = customer.customerid");
 
             while (results.next()) {
-                System.out.printf("%s\n", results.getString("booktitle"));
+                System.out.printf("%s\t\t\t%s\t\t\t%s\n", results.getString("fname"), results.getString("address"), results.getString("quantity"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
